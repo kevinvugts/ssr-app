@@ -1,0 +1,131 @@
+/* ==========================================================================
+Steps
+========================================================================== */
+.steps {
+  @extend .my-2;
+  @extend .my-sm-4;
+
+  justify-content: space-between;
+
+  &__wrapper {
+    @extend .bg-white;
+
+    box-shadow: 0px 4px 4px -4px rgba(0,0,0,0.25);
+    z-index: 1;
+  }
+
+  /* ==========================================================================
+  Nav
+  ========================================================================== */
+  .nav-link {
+    @extend .p-sm-0;
+    @extend .position-relative;
+    @extend .text-grey;
+
+    &:after {
+      @extend .d-none;
+      @extend .w-100;
+
+      border-bottom: 3px solid $theme-primary;
+      content: "";
+      opacity: 0.4;
+      position: absolute;
+    }
+
+    &.active {
+      @extend .text-theme-primary;
+
+      &:after {
+        opacity: 1;
+      }
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+
+    .nav-item {
+      &:not(:last-child) {
+        margin-right: $spacer * 3 !important;
+      }
+    }
+
+    .nav-link {
+      padding-right: $spacer * 4 !important;
+    }
+  }
+
+  @include media-breakpoint-up(sm) {
+
+    .nav-item {
+      &:not(:last-child) {
+        margin-right: $spacer * 2;
+      }
+    }
+    .nav-link {
+      &:after {
+        display: block !important;
+      }
+
+      &.active {
+        &:after {
+          opacity: 1;
+        }
+      }
+
+      .steps__index {
+        display: none;
+      }
+    }
+  }
+
+  /* ==========================================================================
+  Steps title & Steps index
+  ========================================================================== */
+  @include media-breakpoint-down(xs) {
+    .nav-item {
+      flex: auto;
+    }
+
+    .nav-link {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+
+      .steps__title {
+        display: none;
+        font-size: 0.75rem;
+        left: 50%;
+        min-width: 100px;
+        position: absolute;
+        top: 40px;
+        transform: translateX(-50%);
+        right: 0;
+      }
+
+      .steps__index {
+        border-radius: 50%;
+        color: white;
+        display: inline-block !important;
+        height: 25px;
+        margin: 0 auto;
+        text-align: center;
+        width: 25px;
+      }
+
+      &:not(.active) {
+        .steps__index {
+          background-color: $grey;
+        }
+      }
+
+      &.active {
+        .steps__index {
+          background-color: $theme-primary;
+        }
+        .steps__title {
+          display: inline-block;
+        }
+      }
+    }
+  }
+}

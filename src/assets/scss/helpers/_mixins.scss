@@ -1,0 +1,16 @@
+/* stylelint-disable */
+
+/* ==========================================================================
+Calculate REM and fallback
+========================================================================== */
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
+}
+
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: calculateRem($size);
+}
+
+/* stylelint-enable */

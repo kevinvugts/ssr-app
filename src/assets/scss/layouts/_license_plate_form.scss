@@ -1,0 +1,77 @@
+/* ==========================================================================
+License plate form
+========================================================================== */
+.license-plate-form {
+  @extend .mt-4;
+
+  .alert {
+    @extend .mb-0;
+    @extend .mt-2;
+  }
+
+  &__heading {
+    @extend .text-center;
+    @extend .text-theme-primary;
+
+    h4 {
+      @extend .mb-0;
+    }
+  }
+
+  &__input {
+    @extend .d-flex;
+    @extend .pr-0;
+
+    img {
+      @extend .d-flex;
+
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+      flex: 0 44px;
+      max-width: 44px;
+      height: 42px !important;
+    }
+
+    input {
+      @extend .bg-yellow;
+      @extend .d-flex;
+      @extend .text-black;
+
+      @include font-size(24px);
+
+      border: 0;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+      flex: 0 180px;
+      font-weight: $font-weight-bold;
+      height: 42px;
+      max-width: 180px;
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+
+  &__btn {
+    @extend .text-center;
+
+    .btn-blank {
+      @extend .font-weight-normal;
+      // @extend .p-0;
+
+      @include font-size(16px)
+
+      text-decoration: underline;
+
+      &:focus,
+      &:hover {
+        @extend .text-theme-secondary;
+
+        box-shadow: none;
+      }
+    }
+  }
+}

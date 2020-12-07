@@ -1,0 +1,106 @@
+/* ==========================================================================
+Overview page
+========================================================================== */
+
+.overview {
+  &__option-list {
+    p {
+      margin-bottom: 0 !important;
+    }
+
+    &__discountactive {
+      background-color: #d4f2d4;
+      border-radius: 5px;
+
+      @extend .mx-15, .py-15, .w-100;
+    }
+  }
+
+  &__totals {
+    @include media-breakpoint-down(xs) {
+      padding-left: 0 !important;
+    }
+  }
+
+  &__additional {
+    p {
+      margin-bottom: 0 !important;
+    }
+
+    .accordion {
+      button {
+        padding-left: 0;
+        padding-top: 0;
+        font-weight: 400;
+        font-size: 13px;
+      }
+    }
+    @include media-breakpoint-down(sm) {
+      margin-top: 1.25rem !important;
+      margin-bottom: 1.25rem !important;
+    }
+  }
+
+  &__btn {
+    margin-bottom: 1rem;
+    a:hover {
+      text-decoration: none;
+    }
+  }
+
+  &__appointment {
+    a {
+      text-underline-position: under;
+    }
+    p {
+      color: $black;
+    }
+  }
+
+  &__usprow {
+    max-width: 400px;
+    width: 100%;
+
+    img {
+      @extend .mb-4;
+    }
+
+    @include media-breakpoint-down(md) {
+      margin: 0 auto;
+    }
+
+    @include media-breakpoint-up(xl) {
+      position: absolute;
+      top: 0;
+      right: -250px;
+      margin-top: 120px;
+      width: 300px;
+    }
+
+    &--relative {
+      position: relative !important;
+      right: 0 !important;
+      margin-top: $spacer * 4 !important;
+      width: auto !important;
+    }
+  }
+
+  @media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation: landscape) {
+    /* For landscape layouts only */
+    &__pricing--table {
+      justify-content: flex-start !important;
+    }
+
+    &__usprow {
+      position: absolute;
+      top: 0;
+      right: -50px;
+      margin-top: 120px;
+      width: 300px;
+    }
+  }
+
+  &__table {
+    max-width: 500px;
+  }
+}

@@ -1,0 +1,25 @@
+/* ==========================================================================
+Modal
+========================================================================== */
+.modal-dialog {
+  max-width: 600px;
+}
+
+.modal-content {
+  @extend .mt-1;
+  @extend .mt-sm-10;
+  @extend .p-2;
+
+  border-radius: 0;
+}
+
+.modal-header,
+.modal-footer {
+  border: 0;
+}
+
+.modal-footer {
+  .btn {
+    flex: auto;
+  }
+}

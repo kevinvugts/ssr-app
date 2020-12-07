@@ -1,0 +1,167 @@
+/* ==========================================================================
+Toolbar
+========================================================================== */
+.toolbar {
+  @extend .pb-1;
+  flex-wrap: wrap;
+
+  @include media-breakpoint-up(sm) {
+    flex-wrap: nowrap;
+    height: 96px;
+    //padding-bottom: 0 !important;
+  }
+
+  padding-bottom: 0 !important;
+}
+
+.toolbar__datacontainer {
+  @include media-breakpoint-down(xs) {
+    padding: 0px !important;
+  }
+}
+
+/* ==========================================================================
+Toolbar table
+========================================================================== */
+.toolbar__table {
+  @extend .align-items-center;
+  @extend .d-flex;
+  @extend .mb-0;
+  @extend .text-white;
+
+  @include font-size(12px);
+
+  width: auto;
+
+  tr {
+    td {
+      @extend .p-0;
+
+      border: 0;
+
+      &:last-child {
+        @extend .font-weight-light;
+        @extend .pl-2;
+      }
+    }
+  }
+
+  @include media-breakpoint-only(md) {
+    max-width: 150px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    font-size: 1rem;
+  }
+}
+
+/* ==========================================================================
+Toolbar info
+========================================================================== */
+.toolbar__info {
+  // min-width: 300px;
+}
+
+/* ==========================================================================
+Toolbar edit btn
+========================================================================== */
+.toolbar__edit-btn {
+  @extend .btn;
+  @extend .btn-outline-white;
+  @extend .btn-sm;
+
+  align-self: center;
+
+  &.active {
+    @extend .text-theme-primary;
+  }
+
+  @include media-breakpoint-down(md) {
+    max-width: 75px;
+  }
+
+  @include media-breakpoint-down(xs) {
+    @include font-size(12px);
+
+    &.active {
+      color: white !important;
+      background-color: transparent !important;
+    }
+
+    max-width: none;
+
+    border: none;
+    border-bottom: 1px solid white;
+    border-radius: 0px;
+    padding: 0px;
+  }
+}
+
+/* ==========================================================================
+Toolbar price form
+========================================================================== */
+.toolbar__price {
+  @include media-breakpoint-up(sm) {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+  }
+}
+
+.toolbar__price-form {
+  @extend .px-md-2;
+
+  .form-group {
+    @extend .mb-0;
+  }
+
+  .form-label {
+    @extend .mb-0;
+
+    @include font-size(12px);
+  }
+
+  .form-control {
+    @extend .p-0;
+    // @extend .text-right;
+    @extend .text-white;
+
+    background: none;
+    border: 0;
+    // border-color: $white;
+    cursor: default;
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    .form-label {
+      @include font-size(10px);
+    }
+
+    .form-control {
+      @include font-size(12px);
+    }
+  }
+
+  @include media-breakpoint-down(xs) {
+    .form-label {
+      display: flex;
+      text-align: center;
+    }
+
+    .form-control {
+      display: flex;
+      height: auto !important;
+      min-height: auto !important;
+    }
+  }
+
+  @include media-breakpoint-up(sm) {
+    .form-control {
+      min-width: 100px;
+    }
+  }
+}

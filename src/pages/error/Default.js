@@ -1,0 +1,35 @@
+import React from 'react'
+import Head from '../../core/Head'
+import ScrollRestoration from '../../core/ScrollRestoration'
+import BlockHero from '../../blocks/hero/View'
+
+export default (props) => {
+  return (
+    <div className={`page`}>
+      <Head
+        pageTitle="404 - Pagina niet gevonden"
+        seo={[
+          { meta_description: '', meta_title: '', __component: 'seo.meta' },
+          { og_image: '', og_title: '', __component: 'seo.open-graph' },
+        ]}
+        {...props}
+      />
+      <ScrollRestoration />
+
+      <BlockHero
+        title=":'("
+        content="### Oeps, we hebben niets kunnen vinden."
+        image={{
+          url: '/assets/img/hero-404.jpg',
+        }}
+        key="error-hero-404"
+        slug="404"
+        link={{
+          url: '/collections',
+          title: 'Get inspired',
+          class: 'btn btn-primary',
+        }}
+      />
+    </div>
+  )
+}

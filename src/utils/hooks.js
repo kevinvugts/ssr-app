@@ -1,0 +1,121 @@
+import React from 'react'
+
+// utils
+import { generateErrorMessageArray } from './strapi'
+
+function useSafeDispatch(dispatch) {
+  const mounted = React.useRef(false)
+  React.useEffect(() => {
+    mounted.current = true
+    return () => (mounted.current = false)
+  }, [])
+  return React.useCallback(
+    (...args) => (mounted.current ? dispatch(...args) : void 0),
+    [dispatch]
+  )
+}
+
+const defaultInitialState = { status: 'idle', data: null, error: null }
+
+function useAsync(initialState) {
+  const initialStateRef = React.useRef({
+    ...defaultInitialState,
+    ...initialState,
+  })
+  const [{ status, data, error }, setState] = React.useReducer(
+    (s, a) => ({ ...s, ...a }),
+    initialStateRef.current
+  )
+
+  const safeSetState = useSafeDispatch(setState)
+
+  const setData = React.useCallback(
+    data => safeSetState({ data, status: 'resolved' }),
+    [safeSetState]
+  )
+  const setError = React.useCallback(
+    error => safeSetState({ error, status: 'rejected' }),
+    [safeSetState]
+  )
+  const reset = React.useCallback(() => safeSetState(initialStateRef.current), [
+    safeSetState,
+  ])
+
+  const run = React.useCallback(
+    promise => {
+      if (!promise || !promise.then) {
+        throw new Error(
+          `The argument passed to useAsync().run must be a promise. Maybe a function that's passed isn't returning anything?`
+        )
+      }
+      safeSetState({ status: 'pending' })
+      return promise.then(
+        data => {
+          setData(data)
+          return data
+        },
+        error => {
+          error.data
+            ? setError(generateErrorMessageArray(error))
+            : setError(error)
+        }
+      )
+    },
+    [safeSetState, setData, setError]
+  )
+
+  return {
+    // using the same names that react-query uses for convenience
+    isIdle: status === 'idle',
+    isLoading: status === 'pending',
+    isError: status === 'rejected',
+    isSuccess: status === 'resolved',
+
+    setData,
+    setError,
+    error,
+    status,
+    data,
+    run,
+    reset,
+  }
+}
+
+/*
+ * ===================================================
+ *    Profile Completer
+ * ===================================================
+ */
+
+const useProfileCompletion = me => {
+  const [progress, setProgress] = React.useState(0)
+
+  React.useEffect(() => {
+    let newValue = 0
+
+    if (me && me.avatar && me.avatar.url) {
+      newValue += 50
+    }
+
+    if (
+      me &&
+      me.subscribedTopics &&
+      Object.keys(me.subscribedTopics).every(
+        key => me.subscribedTopics[key].length > 0
+      )
+    ) {
+      newValue += 50
+    }
+
+    setTimeout(() => {
+      setProgress(newValue)
+    }, 500)
+  }, [me])
+
+  return {
+    // using the same names that react-query uses for convenience
+    progress,
+  }
+}
+
+export { useAsync, useProfileCompletion }

@@ -1,0 +1,58 @@
+/* ==========================================================================
+Location Item
+========================================================================== */
+.location__item {
+  @extend .shadow-sm;
+
+  &.active {
+    border: 1px solid $theme-primary;
+  }
+
+  @include media-breakpoint-up(sm) {
+    .card-body {
+      text-align: center;
+    }
+  }
+}
+
+.fullwidth-wrapper-container {
+  width: 100%;
+  padding: 0px;
+  max-width: none;
+}
+
+.layout-switcher {
+  &__maps {
+    @extend .col;
+    @extend .mt-4;
+    @extend .d-flex;
+
+    @extend .justify-content-end;
+
+    @include media-breakpoint-down(sm) {
+      justify-content: center !important;
+    }
+
+    button {
+      padding-right: 20px;
+
+      @include media-breakpoint-down(sm) {
+        padding: 0px;
+      }
+    }
+  }
+
+  &__cards {
+    @extend .col-lg-10;
+    @extend .mt-4;
+    @extend .d-flex;
+    @extend .justify-content-end;
+    @extend .p-0;
+  }
+
+  &__button {
+    @extend .btn;
+    @extend .btn-blank;
+    @extend .font-weight-normal;
+  }
+}

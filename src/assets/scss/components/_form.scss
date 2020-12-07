@@ -1,0 +1,124 @@
+/* ==========================================================================
+Form
+========================================================================== */
+.form-control {
+  border-radius: 0;
+  border: 1px solid $black;
+  height: 36px;
+}
+
+.form-label {
+  @extend .font-weight-bold;
+  @extend .mb-0;
+
+  @include font-size(14px);
+}
+
+.valid-feedback.feedback-icon,
+.invalid-feedback.feedback-icon {
+  position: absolute;
+  width: auto;
+  bottom: 10px;
+  right: 10px;
+  margin-top: 0;
+}
+
+/* ==========================================================================
+Custom checkbox
+========================================================================== */
+.custom-checkbox {
+  .custom-control-label {
+    @include font-size(14px);
+
+    padding-left: 20px;
+
+    &:after,
+    &:before {
+      border-radius: 0;
+      height: 25px;
+      top: 0;
+      width: 25px;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.custom-control-input[disabled] ~ .custom-control-label::before,
+.custom-control-input:disabled ~ .custom-control-label::before {
+  @extend .bg-white;
+}
+
+/* ==========================================================================
+React select
+========================================================================== */
+span[aria-live='polite'] {
+  border: 0 !important;
+}
+
+.react-select__control {
+  border: 1px solid $black !important;
+  border-radius: 0 !important;
+  height: 36px;
+
+  &:hover {
+    border: 1px solid $theme-primary;
+  }
+}
+
+.react-select__value-container {
+  @extend .px-1;
+  @extend .py-0;
+}
+
+.react-select__single-value {
+}
+
+.react-select__indicator-separator {
+  display: none;
+}
+
+.react-select__indicator {
+  svg {
+    fill: $black;
+  }
+}
+
+.react-select__menu {
+  border-radius: 0;
+  z-index: 2 !important;
+}
+
+.react-select__menu-list {
+  @extend .p-0;
+}
+
+.react-select__option {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.react-select__option--is-focused {
+  background-color: hsl(0, 0%, 95%);
+}
+
+.react-select__option--is-selected {
+  @extend .bg-theme-primary;
+}
+
+/* ==========================================================================
+React datepicker
+========================================================================== */
+.react-datepicker-wrapper {
+  @extend .d-block;
+}
+
+.react-datepicker__input-container {
+  .form-control:disabled,
+  .form-control[readonly] {
+    @extend .bg-white;
+  }
+}

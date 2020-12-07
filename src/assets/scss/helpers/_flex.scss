@@ -1,0 +1,9 @@
+/* ==========================================================================
+Justify Content
+========================================================================== */
+.justify-content-evenly {
+  /*for ie*/
+  justify-content: space-around;
+  /*for moz & chrome*/
+  -webkit-justify-content: space-evenly !important;
+}

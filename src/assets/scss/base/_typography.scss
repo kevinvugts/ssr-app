@@ -1,0 +1,57 @@
+/* ==========================================================================
+Typography
+========================================================================== */
+h2,
+.h2 {
+  @include font-size(20px);
+
+  font-family: $font-family-1;
+  font-weight: 500;
+
+  @include media-breakpoint-up(sm) {
+    @include font-size(32px);
+  }
+}
+
+h4,
+.h4 {
+  font-family: $font-family-1;
+  font-weight: 500;
+}
+
+h5,
+.h5 {
+  @include font-size(18px);
+}
+
+h6,
+.h6 {
+  @extend .font-weight-bold;
+
+  color: $grey;
+
+  @include media-breakpoint-down(sm) {
+    @include font-size(16px);
+  }
+}
+
+small {
+  @include font-size(12px);
+}
+
+p,
+.p {
+  @include font-size(16px);
+}
+
+@include media-breakpoint-down(md) {
+  .wrapper-container {
+    max-width: unset;
+  }
+}
+
+@include media-breakpoint-up(xl) {
+  .wrapper-container {
+    width: 65vw;
+  }
+}

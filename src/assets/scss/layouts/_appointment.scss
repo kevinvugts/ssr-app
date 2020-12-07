@@ -1,0 +1,20 @@
+/* ==========================================================================
+Appointment Checkbox
+========================================================================== */
+.appointment_checkbox {
+  &.active {
+    .custom-control-label {
+      &:before {
+        @extend .bg-theme-primary;
+
+        border-color: $theme-primary;
+      }
+    }
+  }
+}
+
+.appointment__sidebar {
+  @include media-breakpoint-up(md) {
+    max-width: 300px;
+  }
+}

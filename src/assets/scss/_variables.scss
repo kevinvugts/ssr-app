@@ -1,0 +1,172 @@
+$fa-font-path: '~@fortawesome/fontawesome-pro/webfonts' !default;
+
+/* ==========================================================================
+Colors
+========================================================================== */
+$black: #000000;
+$grey: #999999;
+$theme-primary: #273473;
+$theme-secondary: #d11b2e;
+$white: #ffffff;
+$yellow: #f9be02;
+$green: #29bd28;
+
+$danger: $theme-secondary;
+
+$theme-colors: ();
+$theme-colors: map-merge(
+  (
+    'black': $black,
+    'grey': $grey,
+    'danger': $danger,
+    'theme-primary': $theme-primary,
+    'theme-secondary': $theme-secondary,
+    'yellow': $yellow,
+    'white': $white,
+    'green': $green,
+  ),
+  $theme-colors
+);
+
+/* ==========================================================================
+Fonts
+========================================================================== */
+$font-family-1: 'Lalezar', sans-serif;
+$font-family-2: 'Oxygen', sans-serif;
+$font-family-base: $font-family-2;
+
+/* ==========================================================================
+Grid breakpoints
+========================================================================== */
+$grid-breakpoints: ();
+$grid-breakpoints: map-merge(
+  (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1430px,
+  ),
+  $grid-breakpoints
+);
+
+/* ==========================================================================
+Grid containers
+========================================================================== */
+$container-max-widths: ();
+$container-max-widths: map-merge(
+  (
+    xs: 480px,
+    sm: 540px,
+    md: 720px,
+    lg: 960px,
+    xl: 1140px,
+    xxl: 1430px,
+  ),
+  $container-max-widths
+);
+
+/* ==========================================================================
+Spacing
+========================================================================== */
+$spacer: 0.625rem;
+$spacers: ();
+// stylelint-disable-next-line scss/dollar-variable-default
+$spacers: map-merge(
+  (
+    0: 0,
+    1: $spacer,
+    // 10px
+      15:
+      (
+        $spacer * 1.5,
+      ),
+    // 15px
+      2:
+      (
+        $spacer * 2,
+      ),
+    // 20px
+      25:
+      (
+        $spacer * 2.5,
+      ),
+    // 25px
+      3:
+      (
+        $spacer * 3,
+      ),
+    // 30px
+      35:
+      (
+        $spacer * 3.5,
+      ),
+    // 35px
+      4:
+      (
+        $spacer * 4,
+      ),
+    // 40px
+      45:
+      (
+        $spacer * 4.5,
+      ),
+    // 45px
+      5:
+      (
+        $spacer * 5,
+      ),
+    // 50px
+      55:
+      (
+        $spacer * 5.5,
+      ),
+    // 55px
+      6:
+      (
+        $spacer * 6,
+      ),
+    // 60px
+      65:
+      (
+        $spacer * 6.5,
+      ),
+    // 65px
+      7:
+      (
+        $spacer * 7,
+      ),
+    // 70px
+      75:
+      (
+        $spacer * 7.5,
+      ),
+    // 75px
+      8:
+      (
+        $spacer * 8,
+      ),
+    // 80px
+      85:
+      (
+        $spacer * 8.5,
+      ),
+    // 85px
+      9:
+      (
+        $spacer * 9,
+      ),
+    // 90px
+      95:
+      (
+        $spacer * 9.5,
+      ),
+    // 95px
+      10:
+      (
+        $spacer * 10,
+      ),
+  ),
+  $spacers
+);

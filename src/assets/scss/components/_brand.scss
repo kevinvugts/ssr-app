@@ -1,0 +1,19 @@
+/* ==========================================================================
+Brand Logo
+========================================================================== */
+.brand__logo {
+  @extend .bg-white;
+  @extend .d-none;
+  @extend .d-sm-inline-block;
+  @extend .mr-2;
+
+  max-height: 56px;
+  max-width: 56px;
+
+  border-radius: 10px;
+
+  @include media-breakpoint-up(md) {
+    max-height: 72px;
+    max-width: 72px;
+  }
+}

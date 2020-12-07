@@ -1,0 +1,28 @@
+/* ==========================================================================
+USPS
+========================================================================== */
+
+.usps {
+  @extend .shadow;
+
+  &__list {
+    li {
+      padding-bottom: $spacer / 2;
+      padding-top: $spacer / 2;
+
+      i {
+        @extend .position-relative;
+
+        top: 3px;
+      }
+    }
+  }
+
+  ul {
+    @extend .m-0;
+  }
+
+  &__svg {
+    margin-right: 0.625rem;
+  }
+}
