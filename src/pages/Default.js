@@ -2,8 +2,8 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import Head from '../core/Head'
 //mport Area from '../core/Area'
-import ScrollRestoration from '../core/ScrollRestoration'
-import { useQuery } from 'react-query'
+//import ScrollRestoration from '../core/ScrollRestoration'
+import { useQuery, useQueryCache } from 'react-query'
 import { client } from '../utils/api-client'
 
 import Loading from '../elements/Loading'
@@ -11,6 +11,8 @@ import Loading from '../elements/Loading'
 //import TagManager from 'react-gtm-module'
 
 export default props => {
+  const queryCache = useQueryCache()
+
   let { slug } = useParams()
 
   if (slug === undefined || slug === '') {
@@ -23,17 +25,28 @@ export default props => {
   //   },
   // })
 
-  const { data, isLoading, isError } = useQuery(['pages', slug], () =>
-    client(`pages?slug=${slug}`)
-      .then(res => console.log('RES', res))
+  // const { data, isLoading, isError } = useQuery(['pages', slug], () =>
+  //   client(`pages?slug=${slug}`)
+  //     .then(res => console.log('RES', res))
+  //     .catch(error => console.log('error', error))
+  // )
+
+  const { data, isLoading, isError } = useQuery('users', () =>
+    client(`users`)
+      .then(res => {
+        console.log('RES', res)
+      })
       .catch(error => console.log('error', error))
   )
+
+  console.log('DATA', data)
 
   if (isLoading) {
     console.log('Loading ...')
 
     return <Loading {...props} />
   }
+
   if (isError || (data && !data.length) || !slug) {
     console.log('Error ...')
     return <p>issue</p>
@@ -47,8 +60,9 @@ export default props => {
   return (
     <div className={`page default navbar-transparant ${page && page.slug}`}>
       <Head seo={seo} pageTitle={page ? page.title : 'TESTJE'} />
-      <ScrollRestoration />
+      {/* <ScrollRestoration /> */}
       {/* <Area blocks={page.content} slug={page.slug} /> */}
+      <p>this is a tst page</p>
     </div>
   )
 }

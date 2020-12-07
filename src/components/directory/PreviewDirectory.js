@@ -21,7 +21,6 @@ import defaultWrapper from './elements/wrapper'
 import { Card, ImageTitleCard } from './elements/item'
 
 import ScrollAnimation from 'react-animate-on-scroll'
-//import 'animate.css/animate.min.css'
 
 const defaultProps = {
   classNameRow: 'row',

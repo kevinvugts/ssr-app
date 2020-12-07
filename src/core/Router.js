@@ -7,22 +7,21 @@ import Footer from '../elements/Footer'
 
 import loadable from '@loadable/component'
 
+import Loading from '../elements/Loading'
+
 const DefaultPage = loadable(() => import('../pages/Default'), {
-  fallback: <div>Loading...</div>,
+  fallback: <Loading />,
 })
 
 const variant = 'bg-white text-dark'
 
 export default () => (
   <div className={`page-wrapper ${variant}`}>
+    <Header className={`${variant}`} />
     <Switch className="stack">
-      <Route path="*">
-        <Header className={`${variant}`} />
-        <Switch className="stack">
-          <Route path="/hoi" component={DefaultPage} />
-        </Switch>
-        <Footer />
-      </Route>
+      <Route path="/home" component={DefaultPage} />
+      <Route path="/over" component={() => <p>over ons pagina</p>} />
     </Switch>
+    <Footer />
   </div>
 )

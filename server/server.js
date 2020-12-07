@@ -8,6 +8,7 @@ const cors = require('cors')
 const path = require('path')
 const port = process.env.PORT || 3001
 const compression = require('compression')
+
 import renderReact from './renderReactApp.js'
 
 app.use(
@@ -30,7 +31,36 @@ app.use(
   })
 )
 
-app.use(express.static(path.join(__dirname)))
+function setNoCache(res) {
+  const date = new Date()
+  date.setFullYear(date.getFullYear() - 1)
+  res.setHeader('Expires', date.toUTCString())
+  res.setHeader('Pragma', 'no-cache')
+  res.setHeader('Cache-Control', 'public, no-cache')
+}
+
+function setLongTermCache(res) {
+  const date = new Date()
+  date.setFullYear(date.getFullYear() + 1)
+  res.setHeader('Expires', date.toUTCString())
+  res.setHeader('Cache-Control', 'public, max-age=31536000, immutable')
+}
+
+app.use(
+  express.static(path.join(__dirname), {
+    extensions: ['html'],
+    setHeaders(res, path) {
+      if (path.match(/(\.html|\/sw\.js)$/)) {
+        setNoCache(res)
+        return
+      }
+
+      if (path.match(/\.(js|css|png|jpg|jpeg|gif|ico|json|woff|woff2)$/)) {
+        setLongTermCache(res)
+      }
+    },
+  })
+)
 
 renderReact(app)
 

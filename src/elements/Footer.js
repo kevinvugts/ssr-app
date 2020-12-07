@@ -9,6 +9,7 @@ import ScrollAnimation from 'react-animate-on-scroll'
 import { useMutation } from 'react-query'
 import { client } from '../utils/api-client'
 import { ToastMessage } from '../components/lib'
+import logo from '../assets/images/logo.svg'
 
 const FormSchema = Yup.object().shape({
   email: Yup.string()
@@ -43,7 +44,7 @@ export default props => {
                 delay={0 * 50}
               >
                 <Link to="/">
-                  <img src="/assets/img/logo.svg" height="40" alt="HQUE" />
+                  <img src={logo} height="40" alt="HQUE" />
                 </Link>
                 <p>Redefining spaces.</p>
                 <ul className="list-inline">

@@ -2,6 +2,9 @@ const path = require('path')
 const nodeExternals = require('webpack-node-externals')
 const webpack = require('webpack')
 
+// only for prod
+const CompressionPlugin = require('compression-webpack-plugin')
+
 require('dotenv').config({ path: path.join(__dirname, `.env.development`) })
 
 //https://www.npmjs.com/package/isomorphic-loader
@@ -27,7 +30,7 @@ const common = {
             loader: 'file-loader',
             options: {
               name: '[name].[ext]',
-              outputPath: 'assets',
+              outputPath: 'fonts/',
               esModule: false,
             },
           },
@@ -63,7 +66,7 @@ const common = {
 }
 
 const clientConfig = {
-  mode: 'development',
+  mode: 'production',
   name: 'client',
   target: 'web',
   entry: {
@@ -76,19 +79,22 @@ const clientConfig = {
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: '[name].js',
-    //publicPath: 'public/', <-- when enabled we dont get the < error
-    // when disabled we will get an error on our vendor.js, but our js files are loading in correctly and react-loadable is working
   },
   optimization: {
     splitChunks: {
       cacheGroups: {
-        vendors: false,
-        default: false,
-        // vendor: {
-        //   chunks: 'initial',
-        //   name: 'vendor',
-        //   test: module => /node_modules/.test(module.resource),
-        //   enforce: true,
+        // vendors: false,
+        // default: false,
+        vendor: {
+          chunks: 'initial',
+          name: 'vendor',
+          test: module => /node_modules/.test(module.resource),
+          enforce: true,
+        },
+        // commons: {
+        //   test: /[\\/]node_modules[\\/]/,
+        //   name: 'vendors',
+        //   chunks: 'all',
         // },
       },
     },
@@ -120,10 +126,20 @@ const clientConfig = {
         test: /\.s[ac]ss$/i,
         // include: /node_modules/,
         use: [
+          'isomorphic-style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 1,
+            },
+          },
+          // 'postcss-loader'
+
           // Creates `style` nodes from JS strings
-          'style-loader',
+          // 'style-loader',
           // Translates CSS into CommonJS
-          'css-loader',
+          // 'css-loader',
 
           // Compiles Sass to CSS
           'resolve-url-loader',
@@ -135,10 +151,21 @@ const clientConfig = {
         test: /\.css$/i,
         //include: /node_modules/,
         use: [
+          'isomorphic-style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+            },
+          },
+          // 'postcss-loader'
+
           // Creates `style` nodes from JS strings
-          'style-loader',
+          // 'style-loader',
           // Translates CSS into CommonJS
-          'css-loader',
+          // 'css-loader',
+
+          // Compiles Sass to CSS
           'resolve-url-loader',
           'sass-loader',
           'postcss-loader',
@@ -157,11 +184,17 @@ const clientConfig = {
         googleAnalyticsTrackingId: process.env.GOOGLE_ANALYTICS_TRACKING_ID,
       }),
     }),
+    new CompressionPlugin({
+      filename: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: /\.js$|\.jsx$|\.css$|\.html$/,
+      minRatio: 0.8,
+    }),
   ],
 }
 
 const serverConfig = {
-  mode: 'development',
+  mode: 'production',
   name: 'server',
   target: 'node',
   externals: [nodeExternals()],
@@ -207,14 +240,20 @@ const serverConfig = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          // Translates CSS into CommonJS
+          'isomorphic-style-loader',
           {
             loader: 'css-loader',
             options: {
               importLoaders: 1,
-              modules: true,
             },
           },
+          // 'postcss-loader'
+
+          // Creates `style` nodes from JS strings
+          // 'style-loader',
+          // Translates CSS into CommonJS
+          // 'css-loader',
+
           // Compiles Sass to CSS
           'resolve-url-loader',
           'sass-loader',
@@ -233,6 +272,12 @@ const serverConfig = {
         googleTagManagerId: process.env.GOOGLE_TAGMANAGER_ID,
         googleAnalyticsTrackingId: process.env.GOOGLE_ANALYTICS_TRACKING_ID,
       }),
+    }),
+    new CompressionPlugin({
+      filename: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: /\.js$|\.jsx$|\.css$|\.html$/,
+      minRatio: 0.8,
     }),
   ],
 }

@@ -2,8 +2,9 @@ import React from 'react'
 import Head from '../../core/Head'
 import ScrollRestoration from '../../core/ScrollRestoration'
 import BlockHero from '../../blocks/hero/View'
+import hero from '../assets/images/hero-404.jpg'
 
-export default (props) => {
+export default props => {
   return (
     <div className={`page`}>
       <Head
@@ -20,7 +21,7 @@ export default (props) => {
         title=":'("
         content="### Oeps, we hebben niets kunnen vinden."
         image={{
-          url: '/assets/img/hero-404.jpg',
+          url: hero,
         }}
         key="error-hero-404"
         slug="404"

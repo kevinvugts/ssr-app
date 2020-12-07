@@ -132,7 +132,7 @@ export default props => {
             delay={1 * 50}
           >
             <Navbar.Brand>
-              <Link to="/">
+              <Link to="/home">
                 <img src={navbarStyle.logo.src} height="40" alt="HQUE" />
               </Link>
             </Navbar.Brand>

@@ -8,7 +8,9 @@
   "license": "ISC",
   "scripts": {
     "start": "node ./build/server.js",
-    "build": "webpack"
+    "build": "webpack",
+    "build:prod": "webpack --mode=production",
+    "analyze": "webpack-bundle-analyzer --port 3000 compilation-stats.json"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.12.1",
@@ -50,6 +52,7 @@
     "react-player": "^2.7.0",
     "react-promise-tracker": "^2.0.5",
     "react-query": "^2.26.3",
+    "react-reveal": "^1.2.2",
     "react-router": "^5.2.0",
     "react-router-bootstrap": "^0.25.0",
     "react-router-dom": "^5.1.2",
@@ -90,6 +93,7 @@
     "fs": "^0.0.1-security",
     "html-webpack-plugin": "^3.2.0",
     "html-webpack-template": "^6.2.0",
+    "isomorphic-style-loader": "^5.1.0",
     "lodash-webpack-plugin": "^0.11.5",
     "node-sass": "^4.13.0",
     "path": "^0.12.7",
@@ -104,7 +108,7 @@
     "url-loader": "^3.0.0",
     "webmanifest-loader": "^0.3.0",
     "webpack": "^5.9.0",
-    "webpack-bundle-analyzer": "^3.6.0",
+    "webpack-bundle-analyzer": "^4.2.0",
     "webpack-cli": "^4.2.0",
     "webpack-dev-server": "^3.9.0",
     "webpack-merge": "^4.2.2",

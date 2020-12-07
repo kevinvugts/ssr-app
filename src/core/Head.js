@@ -2,9 +2,9 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 
 export default ({ pageTitle = '', seo = [] }) => {
-  const meta = seo ? seo.find((o) => o.__component === 'seo.meta') || {} : {}
+  const meta = seo ? seo.find(o => o.__component === 'seo.meta') || {} : {}
   const openGraph = seo
-    ? seo.find((o) => o.__component === 'seo.open-graph') || {}
+    ? seo.find(o => o.__component === 'seo.open-graph') || {}
     : {}
 
   return (
@@ -26,34 +26,6 @@ export default ({ pageTitle = '', seo = [] }) => {
       <meta property="og:image" content={openGraph.og_image || ''} />
 
       {/* Fonts */}
-      <link
-        rel="preload"
-        as="font"
-        href="/assets/fonts/D-DINCondensed.woff2"
-        type="font/woff2"
-        crossorigin="anonymous"
-      />
-      <link
-        rel="preload"
-        as="font"
-        href="/assets/fonts/D-DINCondensed-Bold.woff2"
-        type="font/woff2"
-        crossorigin="anonymous"
-      />
-      <link
-        rel="preload"
-        as="font"
-        href="/assets/fonts/D-DIN.woff2"
-        type="font/woff2"
-        crossorigin="anonymous"
-      />
-      <link
-        rel="preload"
-        as="font"
-        href="/assets/fonts/D-DIN-Bold.woff2"
-        type="font/woff2"
-        crossorigin="anonymous"
-      />
 
       {/* Styles */}
       <link
