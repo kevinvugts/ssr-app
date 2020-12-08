@@ -64,7 +64,8 @@
     "smoothscroll-polyfill": "^0.4.4",
     "unorm": "^1.6.0",
     "yup": "^0.31.1",
-    "@babel/polyfill": "^7.12.1"
+    "@babel/polyfill": "^7.12.1",
+    "core-js": "^3.6.4"
   },
   "devDependencies": {
     "@babel/core": "^7.7.5",
@@ -83,7 +84,6 @@
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
     "compression-webpack-plugin": "^7.0.0",
-    "core-js": "^3.6.4",
     "css-loader": "^3.3.0",
     "dotenv": "^8.2.0",
     "eslint": "^6.8.0",
