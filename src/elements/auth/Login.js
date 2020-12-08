@@ -7,7 +7,7 @@ import { useAuth } from '../../context/auth'
 import { useAsync } from '../../utils/hooks'
 import { ErrorMessage } from '../../components/lib'
 
-export default (props) => {
+export default props => {
   const { login } = useAuth()
   const { oauthError } = useParams()
   const { isLoading, isSuccess, isError, error, run } = useAsync()
@@ -69,7 +69,7 @@ export default (props) => {
   return (
     <Formik
       initialValues={{ email: '', password: '' }}
-      validate={(values) => {
+      validate={values => {
         const errors = {}
         if (!values.email) {
           errors.email = 'Voer je e-mailadres in.'
@@ -80,7 +80,7 @@ export default (props) => {
         }
         return errors
       }}
-      onSubmit={(values) => run(login(values))}
+      onSubmit={values => run(login(values))}
     >
       {({
         values,
@@ -139,7 +139,7 @@ export default (props) => {
           <hr className="my-3 hr-text letter-spacing-2" data-content="OF" />
 
           <a
-            href={`${process.env.REACT_APP_API_URL}/connect/facebook`}
+            href={`${APP_CONFIG.apiHost}/connect/facebook`}
             rel="noreferrer noopener"
             target="_blank"
             className="btn btn btn-outline-primary btn-block btn-social mb-3"
@@ -149,7 +149,7 @@ export default (props) => {
           </a>
 
           <a
-            href={`${process.env.REACT_APP_API_URL}/connect/google`}
+            href={`${APP_CONFIG.apiHost}/connect/google`}
             className="btn btn btn-outline-primary btn-block btn-social mb-3 d-none"
           >
             <i className="fa-2x fa-google fab btn-social-icon"></i>Inloggen{' '}

@@ -1,40 +1,24 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import Head from '../core/Head'
-//mport Area from '../core/Area'
-//import ScrollRestoration from '../core/ScrollRestoration'
-import { useQuery, useQueryCache } from 'react-query'
+import Area from '../core/Area'
+import { useQuery } from 'react-query'
 import { client } from '../utils/api-client'
 
 import Loading from '../elements/Loading'
 
-//import TagManager from 'react-gtm-module'
-
 export default props => {
-  const queryCache = useQueryCache()
-
   let { slug } = useParams()
 
   if (slug === undefined || slug === '') {
     slug = 'home'
   }
 
-  // TagManager.dataLayer({
-  //   dataLayer: {
-  //     slug: slug,
-  //   },
-  // })
-
-  // const { data, isLoading, isError } = useQuery(['pages', slug], () =>
-  //   client(`pages?slug=${slug}`)
-  //     .then(res => console.log('RES', res))
-  //     .catch(error => console.log('error', error))
-  // )
-
-  const { data, isLoading, isError } = useQuery('users', () =>
-    client(`users`)
+  const { data, isLoading, isError } = useQuery(['pages', slug], () =>
+    client(`pages?slug=${slug}`)
       .then(res => {
         console.log('RES', res)
+        return res
       })
       .catch(error => console.log('error', error))
   )
@@ -60,9 +44,7 @@ export default props => {
   return (
     <div className={`page default navbar-transparant ${page && page.slug}`}>
       <Head seo={seo} pageTitle={page ? page.title : 'TESTJE'} />
-      {/* <ScrollRestoration /> */}
-      {/* <Area blocks={page.content} slug={page.slug} /> */}
-      <p>this is a tst page</p>
+      <Area blocks={page.content} slug={page.slug} />
     </div>
   )
 }

@@ -6,14 +6,14 @@ import StyleContext from 'isomorphic-style-loader/StyleContext'
 import Html from '../src/core/Html' // our index.html file where we inject the server side rendered components
 import App from '../src/app' // our component which will be rendered on the server
 
+import axios from 'axios'
+
 import {
   ReactQueryCacheProvider,
   ReactQueryConfigProvider,
   QueryCache,
 } from 'react-query'
 import { dehydrate, hydrate } from 'react-query/hydration'
-
-import axios from 'axios'
 
 const renderReact = async app => {
   // if what the user requested is not available in the public folder, we'll send back the index.html
@@ -42,11 +42,14 @@ const renderReact = async app => {
     // Prefetches the data an stores it into queryCache so the frontend already has the data
     // Does re-render on route change which is not desired
     // TODO: Figure out how we can prevent refetching on route change so also the server.js does not make unneccessary requests
-    await prefetchCache.prefetchQuery('users', () =>
+    await prefetchCache.prefetchQuery(['pages', 'home'], () =>
       axios
-        .get('http://localhost:1337/users')
-        .then(res => res.data)
-        .catch(error => console.log('ERROR', error))
+        .get(`http://localhost:1337/pages?slug=${'home'}`)
+        .then(res => {
+          console.log('RES', res)
+          return res.data
+        })
+        .catch(error => console.log('error', error))
     )
 
     const dehydratedState = dehydrate(prefetchCache)

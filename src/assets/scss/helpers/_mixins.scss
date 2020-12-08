@@ -13,4 +13,19 @@ Calculate REM and fallback
   font-size: calculateRem($size);
 }
 
+// Position Mixin
+@mixin position(
+  $pos: null,
+  $top: null,
+  $right: null,
+  $bottom: null,
+  $left: null
+) {
+  position: $pos;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
 /* stylelint-enable */

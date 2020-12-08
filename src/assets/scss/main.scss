@@ -1,50 +1,51 @@
 /* ==========================================================================
 Variables - Must be loaded first
 ========================================================================== */
-@import "_variables";
-@import "helpers/_mixins";
-@import "helpers/_flex";
+@import '_variables';
+@import 'helpers/_mixins';
+@import 'helpers/_flex';
 
 /* ==========================================================================
 Bootstrap - Must be loaded second
 ========================================================================== */
-@import "~bootstrap/scss/bootstrap";
+@import '~bootstrap/scss/bootstrap';
 
 /* ==========================================================================
 Base
 ========================================================================== */
-@import "base/_fonts";
-@import "base/_global";
-@import "base/_typography";
+@import 'base/_fonts';
+@import 'base/_global';
+@import 'base/_typography';
 
 /* ==========================================================================
 Components
 ========================================================================== */
-@import "/components/_alert";
-@import "/components/_brand";
-@import "/components/_buttons";
-@import "/components/_card";
-@import "/components/_form";
-@import "/components/_maps";
-@import "/components/_modal";
-@import "/components/_navbar";
-@import "/components/_navigation";
-@import "/components/_steps";
-@import "/components/_toolbar";
-@import "/components/_usps";
+@import '/components/_alert';
+@import '/components/_brand';
+@import '/components/_buttons';
+@import '/components/_card';
+@import '/components/_form';
+@import '/components/_maps';
+@import '/components/_modal';
+@import '/components/_navbar';
+@import '/components/_navigation';
+@import '/components/_steps';
+@import '/components/_toolbar';
+@import '/components/_usps';
 
 /* ==========================================================================
 Layouts
 ========================================================================== */
-@import "/layouts/_accessoire";
-@import "/layouts/_edit_form";
-@import "/layouts/_license_plate_form";
-@import "/layouts/_towbar";
-@import "/layouts/_overview";
-@import "/layouts/_appointment";
-@import "/layouts/_location";
+@import '/layouts/_accessoire';
+@import '/layouts/_edit_form';
+@import '/layouts/_license_plate_form';
+@import '/layouts/_towbar';
+@import '/layouts/_overview';
+@import '/layouts/_appointment';
+@import '/layouts/_location';
+@import '/layouts/_home';
 
 /* ==========================================================================
 Datepicker
 ========================================================================== */
-@import "~react-datepicker/dist/react-datepicker.min.css";
+@import '~react-datepicker/dist/react-datepicker.min.css';

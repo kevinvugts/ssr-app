@@ -9,7 +9,7 @@ import { useAuth } from '../../context/auth'
 import { useAsync } from '../../utils/hooks'
 import { ErrorMessage } from '../../components/lib'
 
-export default (props) => {
+export default props => {
   const { isLoading, isSuccess, isError, error, run } = useAsync()
   const { oauthError } = useParams()
 
@@ -59,7 +59,7 @@ export default (props) => {
         username: '',
         password: '',
       }}
-      validate={(values) => {
+      validate={values => {
         const errors = {}
 
         if (!values.username) {
@@ -82,20 +82,20 @@ export default (props) => {
           errors.email = 'Geen geldig e-mailadres.'
         }
 
-        if (Object.values(validPassword).some((v) => v === false)) {
+        if (Object.values(validPassword).some(v => v === false)) {
           errors.password = 'Het wachtwoord voldoet niet aan de eisen'
         }
 
         values.password.length < 8
-          ? setValidPassword((prev) => ({ ...prev, longEnough: false }))
-          : setValidPassword((prev) => ({ ...prev, longEnough: true }))
+          ? setValidPassword(prev => ({ ...prev, longEnough: false }))
+          : setValidPassword(prev => ({ ...prev, longEnough: true }))
         !passwordRegex.test(values.password)
-          ? setValidPassword((prev) => ({ ...prev, hasNumber: false }))
-          : setValidPassword((prev) => ({ ...prev, hasNumber: true }))
+          ? setValidPassword(prev => ({ ...prev, hasNumber: false }))
+          : setValidPassword(prev => ({ ...prev, hasNumber: true }))
 
         return errors
       }}
-      onSubmit={(values) => run(register(values))}
+      onSubmit={values => run(register(values))}
     >
       {({
         values,
@@ -174,7 +174,7 @@ export default (props) => {
           <hr className="my-3 hr-text letter-spacing-2" data-content="OF" />
 
           <a
-            href={`${process.env.REACT_APP_API_URL}/connect/facebook`}
+            href={`${APP_CONFIG.apiHost}/connect/facebook`}
             rel="noreferrer noopener"
             target="_blank"
             className="btn btn btn-outline-primary btn-block btn-social mb-3"
@@ -184,7 +184,7 @@ export default (props) => {
           </a>
 
           <a
-            href={`${process.env.REACT_APP_API_URL}/connect/google`}
+            href={`${APP_CONFIG.apiHost}/connect/google`}
             rel="noreferrer noopener"
             target="_blank"
             className="btn btn btn-outline-primary btn-block btn-social mb-3 d-none"

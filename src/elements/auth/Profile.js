@@ -24,7 +24,7 @@ registerPlugin(
   FilePondPluginFileValidateSize
 )
 
-export default (props) => {
+export default props => {
   const queryCache = useQueryCache()
 
   const { data: me, isLoading: isMeLoading } = useQuery('me', async () =>
@@ -34,7 +34,7 @@ export default (props) => {
   const [, setFiles] = React.useState([])
 
   const [mutate, { isLoading, isError, error }] = useMutation(
-    async (values) =>
+    async values =>
       client('users/me', {
         data: values,
         method: 'PUT',
@@ -72,7 +72,7 @@ export default (props) => {
             const cancelToken = axios.CancelToken.source().token
 
             let config = {
-              onUploadProgress: (e) => {
+              onUploadProgress: e => {
                 progress(e.lengthComputable, e.loaded, e.total)
               },
               headers: {
@@ -87,7 +87,7 @@ export default (props) => {
             await axios
               .get(source, config)
               .then(({ data }) => load(data))
-              .catch((err) => {
+              .catch(err => {
                 if (axios.isCancel(err)) {
                   console.log('USER CANCELLED THE REQUEST BEFORE COMPLETED')
                   abort()
@@ -122,7 +122,7 @@ export default (props) => {
             const token = await auth.getToken()
 
             let config = {
-              onUploadProgress: (e) => {
+              onUploadProgress: e => {
                 progress(e.lengthComputable, e.loaded, e.total)
               },
               headers: {
@@ -133,9 +133,9 @@ export default (props) => {
             }
 
             axios
-              .post(`${process.env.REACT_APP_API_URL}/upload`, formData, config)
-              .then((res) => queryCache.invalidateQueries('me'))
-              .catch((error) => {
+              .post(`${APP_CONFIG.apiHost}/upload`, formData, config)
+              .then(res => queryCache.invalidateQueries('me'))
+              .catch(error => {
                 if (axios.isCancel(error)) {
                   console.log('USER CANCELLED THE REQUEST BEFORE COMPLETED')
                   abort()
@@ -150,10 +150,10 @@ export default (props) => {
       if (!isMeLoading) {
         document
           .querySelector('.filepond--root')
-          .addEventListener('FilePond:updatefiles', (e) => {
+          .addEventListener('FilePond:updatefiles', e => {
             const files = e.detail.pond.getFiles()
 
-            setFiles(files.map((file) => file.file))
+            setFiles(files.map(file => file.file))
           })
       }
     }
@@ -182,7 +182,7 @@ export default (props) => {
   return (
     <Formik
       initialValues={initialValues}
-      validate={(values) => {
+      validate={values => {
         const errors = {}
         if (!values.email) {
           errors.email = 'Voer je e-mailadres in.'
@@ -194,7 +194,7 @@ export default (props) => {
 
         return errors
       }}
-      onSubmit={(values) => mutate(difference(values, initialValues))}
+      onSubmit={values => mutate(difference(values, initialValues))}
     >
       {({
         values,

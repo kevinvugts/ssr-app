@@ -95,7 +95,7 @@ const StepperWizard = ({ finishedSteps, ...props }) => {
   )
 }
 
-const StepperHeader = (props) => {
+const StepperHeader = props => {
   if (props.title) {
     return (
       <div className="row mb-4 justify-content-center text-center">
@@ -108,7 +108,7 @@ const StepperHeader = (props) => {
   }
 }
 
-const StepperActions = (props) => {
+const StepperActions = props => {
   const history = useHistory()
   const queryCache = useQueryCache()
   const [error, setError] = React.useState(null)
@@ -121,25 +121,25 @@ const StepperActions = (props) => {
       data: {
         subscribedTopics: {
           rooms: JSON.parse(localStorage.getItem('selectedSubs')).map(
-            (e) => e.id
+            e => e.id
           ),
           branches: JSON.parse(localStorage.getItem('selectedBranch')).map(
-            (e) => e.id
+            e => e.id
           ),
         },
       },
       method: 'PUT',
       token: await auth.getToken(),
     })
-      .then((res) => res.data)
-      .catch((error) => Promise.reject(error.response.data))
+      .then(res => res.data)
+      .catch(error => Promise.reject(error.response.data))
   }
 
   async function subscribeToNewsLetter() {
     await subscribeUserToTopics()
 
     axios
-      .post(process.env.REACT_APP_API_URL + '/deals/newsletter', {
+      .post(APP_CONFIG.apiHost + '/deals/newsletter', {
         email: user.email,
       })
       .then(() => {
@@ -152,7 +152,7 @@ const StepperActions = (props) => {
 
         history.push('/profiel')
       })
-      .catch((error) => {
+      .catch(error => {
         setError(generateErrorMessageArray(error.response.data))
       })
   }
@@ -202,7 +202,7 @@ const StepperActions = (props) => {
   )
 }
 
-const StepperFooter = (props) => {
+const StepperFooter = props => {
   const history = useHistory()
 
   return (
@@ -253,7 +253,7 @@ const StepperFooter = (props) => {
   )
 }
 
-export default (props) => {
+export default props => {
   const [subs] = React.useState(
     (window.localStorage.getItem('selectedBranch') &&
       JSON.parse(window.localStorage.getItem('selectedBranch')).reduce(
@@ -323,9 +323,9 @@ export default (props) => {
                     const prev = selectedSubs
                     let newSelectedSubs = [...prev]
 
-                    if (prev.find((o) => o.id === item.id)) {
+                    if (prev.find(o => o.id === item.id)) {
                       newSelectedSubs = newSelectedSubs.filter(
-                        (e) => e.id !== item.id
+                        e => e.id !== item.id
                       )
                     } else {
                       newSelectedSubs = [...newSelectedSubs, item]
@@ -343,7 +343,7 @@ export default (props) => {
                   >
                     <ImageTitleCard
                       selected={
-                        selectedSubs.find((o) => o.id === item.id) !== undefined
+                        selectedSubs.find(o => o.id === item.id) !== undefined
                       }
                       disabledLink
                       minHeight="205px"
@@ -417,9 +417,9 @@ export default (props) => {
                     const prev = selectedItem
                     let newSelectedItem = [...prev]
 
-                    if (prev.find((o) => o.id === item.id)) {
+                    if (prev.find(o => o.id === item.id)) {
                       newSelectedItem = newSelectedItem.filter(
-                        (e) => e.id !== item.id
+                        e => e.id !== item.id
                       )
                     } else {
                       newSelectedItem = [...newSelectedItem, item]
@@ -437,7 +437,7 @@ export default (props) => {
                   >
                     <ImageTitleCard
                       selected={
-                        selectedItem.find((o) => o.id === item.id) !== undefined
+                        selectedItem.find(o => o.id === item.id) !== undefined
                       }
                       disabledLink
                       minHeight="205px"

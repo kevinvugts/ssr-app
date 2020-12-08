@@ -1,11 +1,14 @@
 import React from 'react'
-import ReactMarkdown from 'react-markdown'
+//import ReactMarkdown from 'react-markdown'
 import Link from '../../core/helpers/Link'
 import ScrollAnimation from 'react-animate-on-scroll'
 import { getImageURL } from '../../core/helpers/Image'
 import { IKImage } from 'imagekitio-react'
 
-export default (props) => {
+import loadable from '@loadable/component'
+const ReactMarkdown = loadable(() => import('react-markdown'))
+
+export default props => {
   return (
     <section className="hero-home dark-overlay">
       <ScrollAnimation
@@ -17,7 +20,9 @@ export default (props) => {
         <IKImage
           alt="bg"
           className="bg-image"
-          path={getImageURL(props.image).split('/').pop()}
+          path={getImageURL(props.image)
+            .split('/')
+            .pop()}
           srcSet={`
             https://ik.imagekit.io/hque/tr:w-425,h-416/${getImageURL(
               props.image

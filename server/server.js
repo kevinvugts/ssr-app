@@ -1,7 +1,3 @@
-// require('babel-register')({
-//   presets: ['es2015', 'react'],
-// })
-
 const express = require('express')
 const app = express()
 const cors = require('cors')

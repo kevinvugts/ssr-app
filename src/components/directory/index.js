@@ -35,7 +35,7 @@ const defaultProps = {
   filters: [],
   query: {},
   _limit: 36,
-  _sort: process.env.REACT_APP_DB_UPDATEDAT + ':DESC',
+  _sort: APP_CONFIG.updatedAt + ':DESC',
   renderWrapper: defaultWrapper,
   renderItem: (item, index) => (
     <div className="col-md-4 col-sm-12 mb-5" key={`${index}-${item.id}`}>

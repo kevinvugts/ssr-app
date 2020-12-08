@@ -169,6 +169,9 @@ const clientConfig = {
       algorithm: 'gzip',
       test: /\.js$|\.jsx$|\.css$|\.html$/,
     }),
+    new webpack.ProvidePlugin({
+      process: 'process/browser',
+    }),
   ],
 }
 
@@ -240,6 +243,7 @@ const serverConfig = {
       APP_CONFIG: JSON.stringify({
         appEnvironment: process.env.APP_ENVIRONMENT,
         apiHost: process.env.REACT_APP_API_URL || 'http://localhost:1337',
+        updatedAt: process.env.REACT_APP_DB_UPDATEDAT,
         apiVersion: process.env.API_VERSION,
         googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
         googleTagManagerId: process.env.GOOGLE_TAGMANAGER_ID,
@@ -249,6 +253,9 @@ const serverConfig = {
     new CompressionPlugin({
       algorithm: 'gzip',
       test: /\.js$|\.jsx$|\.css$|\.html$/,
+    }),
+    new webpack.ProvidePlugin({
+      process: 'process/browser',
     }),
   ],
 }
