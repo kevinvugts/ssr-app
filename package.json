@@ -8,7 +8,8 @@
   "license": "ISC",
   "scripts": {
     "start": "node ./build/server.js",
-    "build": "webpack",
+    "build": "webpack --mode=production",
+    "build:dev": "webpack",
     "build:prod": "webpack --mode=production",
     "analyze": "webpack-bundle-analyzer --port 3000 compilation-stats.json"
   },
