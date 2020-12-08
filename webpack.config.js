@@ -83,19 +83,12 @@ const clientConfig = {
   optimization: {
     splitChunks: {
       cacheGroups: {
-        // vendors: false,
-        // default: false,
         vendor: {
           chunks: 'initial',
           name: 'vendor',
           test: module => /node_modules/.test(module.resource),
           enforce: true,
         },
-        // commons: {
-        //   test: /[\\/]node_modules[\\/]/,
-        //   name: 'vendors',
-        //   chunks: 'all',
-        // },
       },
     },
   },
@@ -134,12 +127,6 @@ const clientConfig = {
               importLoaders: 1,
             },
           },
-          // 'postcss-loader'
-
-          // Creates `style` nodes from JS strings
-          // 'style-loader',
-          // Translates CSS into CommonJS
-          // 'css-loader',
 
           // Compiles Sass to CSS
           'resolve-url-loader',
@@ -158,12 +145,6 @@ const clientConfig = {
               importLoaders: 1,
             },
           },
-          // 'postcss-loader'
-
-          // Creates `style` nodes from JS strings
-          // 'style-loader',
-          // Translates CSS into CommonJS
-          // 'css-loader',
 
           // Compiles Sass to CSS
           'resolve-url-loader',
@@ -185,10 +166,8 @@ const clientConfig = {
       }),
     }),
     new CompressionPlugin({
-      filename: '[path].gz[query]',
       algorithm: 'gzip',
       test: /\.js$|\.jsx$|\.css$|\.html$/,
-      minRatio: 0.8,
     }),
   ],
 }
@@ -247,12 +226,6 @@ const serverConfig = {
               importLoaders: 1,
             },
           },
-          // 'postcss-loader'
-
-          // Creates `style` nodes from JS strings
-          // 'style-loader',
-          // Translates CSS into CommonJS
-          // 'css-loader',
 
           // Compiles Sass to CSS
           'resolve-url-loader',
@@ -274,10 +247,8 @@ const serverConfig = {
       }),
     }),
     new CompressionPlugin({
-      filename: '[path].gz[query]',
       algorithm: 'gzip',
       test: /\.js$|\.jsx$|\.css$|\.html$/,
-      minRatio: 0.8,
     }),
   ],
 }
