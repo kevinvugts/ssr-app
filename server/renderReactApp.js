@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOMServer from 'react-dom/server' // allows us to render react components tree on the server
 import { StaticRouter } from 'react-router-dom'
 import StyleContext from 'isomorphic-style-loader/StyleContext'
+import { Helmet } from 'react-helmet'
 
 import Html from '../src/core/Html' // our index.html file where we inject the server side rendered components
 import App from '../src/app' // our component which will be rendered on the server
@@ -45,10 +46,7 @@ const renderReact = async app => {
     await prefetchCache.prefetchQuery(['pages', 'home'], () =>
       axios
         .get(`${APP_CONFIG.apiHost}/pages?slug=${'home'}`)
-        .then(res => {
-          console.log('RES', res)
-          return res.data
-        })
+        .then(res => res.data)
         .catch(error => console.log('error', error))
     )
 
@@ -61,7 +59,7 @@ const renderReact = async app => {
     const insertCss = (...styles) =>
       styles.forEach(style => css.add(style._getCss()))
 
-    const scripts = ['vendor.js', 'client.js']
+    //const scripts = ['vendor.js', 'client.js']
 
     // renderToStaticMarkup omits all the HTML attributes React adds to the DOM during rendering
     const appMarkup = ReactDOMServer.renderToString(
@@ -76,17 +74,56 @@ const renderReact = async app => {
       </StaticRouter>
     )
 
-    const html = ReactDOMServer.renderToStaticMarkup(
-      <Html
-        children={appMarkup}
-        scripts={scripts}
-        initialData={dehydratedState}
-        criticalCss={css}
-      />
-    )
+    const helmet = Helmet.renderStatic()
 
-    res.status(200).send(`<!DOCTYPE html>${html}`)
+    // const html = ReactDOMServer.renderToStaticMarkup(
+    //   <Html
+    //     children={appMarkup}
+    //     scripts={scripts}
+    //     initialData={dehydratedState}
+    //     criticalCss={css}
+    //     helmet={helmet}
+    //   />
+    // )
+
+    res
+      .status(200)
+      .send(renderFullPage(appMarkup, helmet, css, dehydratedState))
   })
+}
+
+const renderFullPage = (html, helmet, criticalCss, initialData) => {
+  return `
+    <!doctype html>
+    <html ${helmet.htmlAttributes.toString()}>
+      <head>
+      <meta charSet="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        ${helmet.title.toString()}
+        ${helmet.meta.toString()}
+        ${helmet.link.toString()}
+        ${helmet.style.toString()}
+        ${helmet.script.toString()}
+
+        <style>${[...criticalCss].join('')}</style>
+      </head>
+        <body ${helmet.bodyAttributes.toString()}>
+          <div id="app">${html}</div>
+
+        ${initialData &&
+          `<script>
+              window.__REACT_QUERY_INITIAL_QUERIES__ = ${JSON.stringify(
+                initialData
+              )}
+          </script>`}
+
+
+        <script src="client.js" type="text/javascript"></script>
+        <script src="vendor.js" type="text/javascript"></script>
+      </body>
+    </html>
+    `
 }
 
 export default renderReact

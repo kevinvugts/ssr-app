@@ -179,7 +179,7 @@ const serverConfig = {
   mode: 'production',
   name: 'server',
   target: 'node',
-  externals: [nodeExternals()],
+  externals: [nodeExternals(), 'react-helmet'],
   entry: {
     server: [
       '@babel/polyfill',
