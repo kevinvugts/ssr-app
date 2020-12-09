@@ -8,7 +8,7 @@ export default ({ pageTitle = '', seo = [] }) => {
     : {}
 
   return (
-    <Helmet>
+    <Helmet htmlAttributes={{ lang: 'nl' }}>
       <title>{pageTitle}</title>
 
       {/* Meta */}
