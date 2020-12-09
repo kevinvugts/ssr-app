@@ -12,7 +12,7 @@ const Html = ({ children, initialData, criticalCss, scripts }) => {
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="EnoRm - Server Side Rendered App " />
+        {/* <meta name="description" content="EnoRm - Server Side Rendered App " />
         <meta name="keywords" content="HTML,CSS,JavaScript,jQuery,XML,PHP" />
         <meta property="og:locale" content="nl_NL" />
         <meta property="og:title" content="EnOrm - Server Side Broski" />
@@ -25,7 +25,7 @@ const Html = ({ children, initialData, criticalCss, scripts }) => {
         <meta
           property="og:description"
           content="A mind-blowing mix of creative, tech and performance. To ensure your next-level website truly converts, your stunning branding gets the audience it deserves and your brilliant campaigns lead to interesting prospects."
-        />
+        /> */}
 
         <title>Server Side Rendered React App!!</title>
         <style>{[...criticalCss].join('')}</style>
