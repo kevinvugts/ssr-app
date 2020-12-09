@@ -79,10 +79,6 @@ const renderReact = async app => {
         <StyleContext.Provider value={{ insertCss }}>
           <ReactQueryCacheProvider queryCache={renderCache}>
             <ReactQueryConfigProvider config={queryConfig}>
-              <Helmet>
-                <title>Hello World</title>
-                <link rel="canonical" href="https://www.tacobell.com/" />
-              </Helmet>
               <App initialData={dehydratedState} />
             </ReactQueryConfigProvider>
           </ReactQueryCacheProvider>

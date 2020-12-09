@@ -45,7 +45,10 @@ export default props => {
 
   return (
     <div className={`page default navbar-transparant ${page && page.slug}`}>
-      <Head seo={seo} pageTitle={page ? page.title : 'TESTJE'} />
+      <Head
+        seo={seo}
+        pageTitle={page && page.title ? page.title : 'Test Titel fallback'}
+      />
       <Area blocks={page.content} slug={page.slug} />
     </div>
   )
