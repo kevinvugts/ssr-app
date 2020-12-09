@@ -44,7 +44,7 @@ const renderReact = async app => {
     // TODO: Figure out how we can prevent refetching on route change so also the server.js does not make unneccessary requests
     await prefetchCache.prefetchQuery(['pages', 'home'], () =>
       axios
-        .get(`http://localhost:1337/pages?slug=${'home'}`)
+        .get(`${process.env.API_HOST}/pages?slug=${'home'}`)
         .then(res => {
           console.log('RES', res)
           return res.data
