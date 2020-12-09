@@ -14,10 +14,12 @@ export default props => {
     slug = 'home'
   }
 
+  console.log('slug', slug)
+
   const { data, isLoading, isError } = useQuery(['pages', slug], () =>
     client(`pages?slug=${slug}`)
       .then(res => {
-        console.log('RES', res)
+        console.log('RES >>>', res)
         return res
       })
       .catch(error => console.log('error', error))

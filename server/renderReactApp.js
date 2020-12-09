@@ -4,7 +4,6 @@ import { StaticRouter } from 'react-router-dom'
 import StyleContext from 'isomorphic-style-loader/StyleContext'
 import { Helmet } from 'react-helmet'
 
-import Html from '../src/core/Html' // our index.html file where we inject the server side rendered components
 import App from '../src/app' // our component which will be rendered on the server
 
 import axios from 'axios'
@@ -19,6 +18,8 @@ import { dehydrate, hydrate } from 'react-query/hydration'
 const renderReact = async app => {
   // if what the user requested is not available in the public folder, we'll send back the index.html
   app.get('*', async (req, res) => {
+    console.log('HITTING ROUTE ON SERVER')
+
     const queryConfig = {
       queries: {
         useErrorBoundary: true,
@@ -45,13 +46,24 @@ const renderReact = async app => {
     // TODO: Figure out how we can prevent refetching on route change so also the server.js does not make unneccessary requests
     await prefetchCache.prefetchQuery(['pages', 'home'], () =>
       axios
-        .get(`${APP_CONFIG.apiHost}/pages?slug=${'home'}`)
-        .then(res => res.data)
+        .get(`${APP_CONFIG.apiHost}/pages?slug=home`)
+        .then(res => {
+          console.log('res.data', res.data)
+          return res.data
+        })
         .catch(error => console.log('error', error))
     )
-
     const dehydratedState = dehydrate(prefetchCache)
-    const renderCache = new QueryCache()
+    const renderCache = new QueryCache({
+      defaultConfig: {
+        queries: {
+          staleTime: 1000 * 60,
+          cacheTime: 1000 * 60,
+          refetchOnWindowFocus: false,
+        },
+      },
+    })
+
     hydrate(renderCache, dehydratedState)
     // End Getting initial data
 
@@ -59,7 +71,7 @@ const renderReact = async app => {
     const insertCss = (...styles) =>
       styles.forEach(style => css.add(style._getCss()))
 
-    //const scripts = ['vendor.js', 'client.js']
+    // const scripts = ['vendor.js', 'client.js']
 
     // renderToStaticMarkup omits all the HTML attributes React adds to the DOM during rendering
     const appMarkup = ReactDOMServer.renderToString(
@@ -67,6 +79,10 @@ const renderReact = async app => {
         <StyleContext.Provider value={{ insertCss }}>
           <ReactQueryCacheProvider queryCache={renderCache}>
             <ReactQueryConfigProvider config={queryConfig}>
+              <Helmet>
+                <title>Hello World</title>
+                <link rel="canonical" href="https://www.tacobell.com/" />
+              </Helmet>
               <App initialData={dehydratedState} />
             </ReactQueryConfigProvider>
           </ReactQueryCacheProvider>
@@ -75,16 +91,6 @@ const renderReact = async app => {
     )
 
     const helmet = Helmet.renderStatic()
-
-    // const html = ReactDOMServer.renderToStaticMarkup(
-    //   <Html
-    //     children={appMarkup}
-    //     scripts={scripts}
-    //     initialData={dehydratedState}
-    //     criticalCss={css}
-    //     helmet={helmet}
-    //   />
-    // )
 
     res
       .status(200)
@@ -107,7 +113,7 @@ const renderFullPage = (html, helmet, criticalCss, initialData) => {
         ${helmet.script.toString()}
 
         <style>${[...criticalCss].join('')}</style>
-      </head>
+
         <body ${helmet.bodyAttributes.toString()}>
           <div id="app">${html}</div>
 

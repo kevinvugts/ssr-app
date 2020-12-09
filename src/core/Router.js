@@ -8,10 +8,13 @@ import Footer from '../elements/Footer'
 import loadable from '@loadable/component'
 
 import Loading from '../elements/Loading'
+import { Helmet } from 'react-helmet'
+import Head from './Head'
+// const DefaultPage = loadable(() => import('../pages/Default'), {
+//   fallback: <Loading />,
+// })
 
-const DefaultPage = loadable(() => import('../pages/Default'), {
-  fallback: <Loading />,
-})
+import DefaultPage from '../pages/Default'
 
 const variant = 'bg-white text-dark'
 
@@ -20,7 +23,17 @@ export default () => (
     <Header className={`${variant}`} />
     <Switch className="stack">
       <Route path="/home" component={DefaultPage} />
-      <Route path="/over" component={() => <p>over ons pagina</p>} />
+      <Route
+        path="/over"
+        component={() => {
+          return (
+            <>
+              <Head seo={[]} pageTitle={'test jonge'} />
+              <p>over ons pagina</p>
+            </>
+          )
+        }}
+      />
     </Switch>
     <Footer />
   </div>

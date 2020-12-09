@@ -2,6 +2,7 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 
 export default ({ pageTitle = '', seo = [] }) => {
+  console.log('RENDERING THE HEAD.JS')
   const meta = seo ? seo.find(o => o.__component === 'seo.meta') || {} : {}
   const openGraph = seo
     ? seo.find(o => o.__component === 'seo.open-graph') || {}

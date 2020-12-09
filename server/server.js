@@ -27,6 +27,11 @@ app.use(
   })
 )
 
+// For some odd reason favicon is being called on the server
+app.get('/favicon.ico', function(req, res) {
+  res.sendStatus(204)
+})
+
 function setNoCache(res) {
   const date = new Date()
   date.setFullYear(date.getFullYear() - 1)
