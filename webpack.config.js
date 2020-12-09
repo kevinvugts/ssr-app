@@ -254,9 +254,6 @@ const serverConfig = {
       algorithm: 'gzip',
       test: /\.js$|\.jsx$|\.css$|\.html$/,
     }),
-    new webpack.ProvidePlugin({
-      process: 'process/browser',
-    }),
   ],
 }
 
