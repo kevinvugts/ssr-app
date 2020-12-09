@@ -24,7 +24,8 @@ export default ({ pageTitle = '', seo = [] }) => {
         property="og:description"
         content={openGraph.og_description || ''}
       />
-      <meta property="og:image" content={openGraph.og_image || ''} />
+
+      <meta property="og:image" content={openGraph.og_image.url || ''} />
 
       {/* Fonts */}
 
