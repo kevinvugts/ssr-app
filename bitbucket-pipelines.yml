@@ -11,36 +11,6 @@ image: node:12.18.3
 pipelines:
   branches:
     # When code is pushed to the staging branch it is deployed automatically to the staging environment.
-    develop:
-      - step:
-          name: Build & Testing Development
-          caches:
-            - node
-          script:
-            - rm -rf package-lock.json
-            - rm -rf node_modules
-            - npm run clean-dist
-            - rm -rf public/dist
-            - yarn install
-            - yarn run build
-      - step:
-          name: Create artifact
-          script:
-            - git archive --format=tar.gz develop -o application.tar.gz
-          artifacts:
-            - application.tar.gz
-      - step:
-          name: Deploy to heroku development
-          deployment: develop
-          caches:
-            - node
-          script:
-            - pipe: atlassian/heroku-deploy:1.1.4
-              variables:
-                HEROKU_API_KEY: $HEROKU_API_KEY
-                HEROKU_APP_NAME: $HEROKU_APP_NAME
-                ZIP_FILE: 'application.tar.gz'
-                WAIT: 'true'
     staging:
       - step:
           name: Build & Testing Staging
