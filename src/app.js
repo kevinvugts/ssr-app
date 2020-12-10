@@ -12,7 +12,7 @@ import { AuthProvider } from './context/auth'
 //import AppContext from './app'
 
 // required parameter to fetch images from image kit
-const urlEndpoint = 'https://ik.imagekit.io/hque'
+const urlEndpoint = APP_CONFIG.imageKitUrl
 
 import * as Sentry from '@sentry/react'
 
@@ -21,17 +21,11 @@ import { errorDialogOptions } from './seed'
 
 Sentry.init({
   dsn:
-    'https://7b55b0029fae444f96f94f5d1860d80c@o226067.ingest.sentry.io/5455847',
-  // integrations: [new Integrations.BrowserTracing()],
-
-  // We recommend adjusting this value in production, or using tracesSampler
-  // for finer control
-  // tracesSampleRate: 1.0,
+    'https://5c830ebbb4cf4a17b52cfe47d4830034@o226067.ingest.sentry.io/5550799',
 })
 
 // Cause an error thrown when using AppProviders directly I have decided to put the context in the app.js
 // TODO: Ideally we want the context to be living in the contex/index.js file but for some odd reason it does not work
-
 const App = () => {
   return (
     <Sentry.ErrorBoundary

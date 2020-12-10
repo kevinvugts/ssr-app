@@ -157,6 +157,7 @@ const clientConfig = {
   plugins: [
     new webpack.DefinePlugin({
       APP_CONFIG: JSON.stringify({
+        imageKitUrl: process.env.IMAGE_KIT_URL,
         appEnvironment: process.env.APP_ENVIRONMENT,
         apiHost: process.env.API_HOST,
         apiVersion: process.env.API_VERSION,
@@ -241,6 +242,7 @@ const serverConfig = {
   plugins: [
     new webpack.DefinePlugin({
       APP_CONFIG: JSON.stringify({
+        imageKitUrl: process.env.IMAGE_KIT_URL,
         appEnvironment: process.env.APP_ENVIRONMENT,
         apiHost: process.env.REACT_APP_API_URL || 'http://localhost:1337',
         updatedAt: process.env.REACT_APP_DB_UPDATEDAT,

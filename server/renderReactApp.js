@@ -18,6 +18,7 @@ import { dehydrate, hydrate } from 'react-query/hydration'
 const renderReact = async app => {
   // if what the user requested is not available in the public folder, we'll send back the index.html
   app.get('*', async (req, res) => {
+    const slug = req.url
     console.log('HITTING ROUTE ON SERVER')
 
     const queryConfig = {
@@ -44,13 +45,10 @@ const renderReact = async app => {
     // Prefetches the data an stores it into queryCache so the frontend already has the data
     // Does re-render on route change which is not desired
     // TODO: Figure out how we can prevent refetching on route change so also the server.js does not make unneccessary requests
-    await prefetchCache.prefetchQuery(['pages', 'home'], () =>
+    await prefetchCache.prefetchQuery(['pages', slug], () =>
       axios
-        .get(`${APP_CONFIG.apiHost}/pages?slug=home`)
-        .then(res => {
-          console.log('res.data', res.data)
-          return res.data
-        })
+        .get(`${APP_CONFIG.apiHost}/pages?slug=${slug}`)
+        .then(res => res.data)
         .catch(error => console.log('error', error))
     )
     const dehydratedState = dehydrate(prefetchCache)
