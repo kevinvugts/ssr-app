@@ -19,7 +19,6 @@ const renderReact = async app => {
   // if what the user requested is not available in the public folder, we'll send back the index.html
   app.get('*', async (req, res) => {
     const slug = req.url
-    console.log('HITTING ROUTE ON SERVER')
 
     const queryConfig = {
       queries: {
@@ -68,8 +67,6 @@ const renderReact = async app => {
     const css = new Set() // CSS for all rendered React components
     const insertCss = (...styles) =>
       styles.forEach(style => css.add(style._getCss()))
-
-    // const scripts = ['vendor.js', 'client.js']
 
     // renderToStaticMarkup omits all the HTML attributes React adds to the DOM during rendering
     const appMarkup = ReactDOMServer.renderToString(
